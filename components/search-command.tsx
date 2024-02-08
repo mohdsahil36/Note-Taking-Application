@@ -33,7 +33,7 @@ export const SearchCommand = () => {
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+      if (e.key === "j" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
         toggle();
       }
@@ -55,7 +55,7 @@ export const SearchCommand = () => {
   return (
     <CommandDialog open={isOpen} onOpenChange={onClose}>
       <CommandInput
-        placeholder={`Search ${user?.fullName}'s Jotion...`}
+        placeholder={`Search ${user?.fullName}'s Notion...`}
       />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
