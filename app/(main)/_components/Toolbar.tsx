@@ -8,6 +8,7 @@ import { useRef, ElementRef, useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import TextareaAutosize from "react-textarea-autosize";
+import { useCoverImage } from "@/hooks/use-cover-image";
 
 interface ToolbarProps {
   initialData: Doc<"documents">;
@@ -15,6 +16,8 @@ interface ToolbarProps {
 }
 
 export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
+  const coverImage=useCoverImage();
+
   const inputRef = useRef<ElementRef<"textarea">>(null);
 
   const [isEditing, setisEditing] = useState(false);
@@ -67,7 +70,7 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
 
   return (
     <div className="pl-[54px] group relative">
-      {!!initialData.icon && !preview && (
+       {!!initialData.icon && !preview && (
         <div className="flex items-center gap-x-2 group/icon pt-6">
           <IconPicker onChange={onIconSelect}>
             <p className="text-6xl hover:opacity-75 transition">
@@ -75,8 +78,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
             </p>
           </IconPicker>
           <Button
-            onClick={onRemoveIcon}
-            className="rounded-full opacity-0 group-hover/icon:opacity-100 transition text-muted-foreground text-sm"
+            // onClick={onRemoveIcon}
+            className="rounded-full opacity-0 group-hover/icon:opacity-100 transition text-muted-foreground text-xs"
             variant="outline"
             size="icon"
           >
@@ -102,7 +105,8 @@ export const Toolbar = ({ initialData, preview }: ToolbarProps) => {
         )}
         {!initialData.coverImage && !preview && (
           <Button
-            className="text-muted-foreground text-sm"
+          onClick={coverImage.onOpen}
+            className="text-muted-foreground text-xs"
             variant="outline"
             size="sm"
           >
